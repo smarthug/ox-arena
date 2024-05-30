@@ -5,9 +5,9 @@ import App from "./App";
 import "./index.css";
 
 insertCoin({
-  skipLobby: false,
+  skipLobby: true,
   gameId: "Nrkxf84kYcXG6I3RY6sJ",
-  discord: true,
+  discord: false,
 }).then(() =>
   ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
