@@ -1,14 +1,20 @@
 import { Box } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { getState } from "playroomkit";
+import { getState, useMultiplayerState } from "playroomkit";
 import { useEffect } from "react";
 import { useAudioManager } from "../hooks/useAudioManager";
 import { useGameState } from "../hooks/useGameState";
 import { Character } from "./Character";
 
+
+
 export const Podium = () => {
   const { winner } = useGameState();
-  const winnerProfile = winner || getState("lastDead");
+  // const [winner, setWinner] = useMultiplayerState("winner", null);
+  const winnerProfile = winner 
+  // console.log(winnerProfile)
+
+  // const winnerProfile = winner || getState("lastDead");
   const camera = useThree((state) => state.camera);
   const { playAudio } = useAudioManager();
   useEffect(() => {

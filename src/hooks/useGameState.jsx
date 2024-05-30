@@ -101,41 +101,41 @@ export const GameStateProvider = ({ children }) => {
         if (stage === "game") {
           const playersAlive = players.filter((p) => !p.state.getState("dead"));
           if (playersAlive.length < (soloGame ? 1 : 2)) {
+            console.log(playersAlive)
             setStage("winner", true);
             setWinner(playersAlive[0]?.state.state.profile, true);
             newTime = TIMER_STAGE.winner;
           }
+
+          // check every 5 seconds
+          if (newTime % 5 === 0) {
+            console.log("5 seconds passed");
+            lastShowdownTime.current = newTime;
+            const random = Math.random();
+
+            RPC.call("showdown", random, RPC.Mode.ALL);
+          }
+
+          // restore after 2 seconds when showdown
+          if (newTime - lastShowdownTime.current === 2) {
+            console.log("2 seconds passed after showdown");
+
+            RPC.call(
+              "restore",
+              "2 seconds passed after showdown",
+              RPC.Mode.ALL
+            );
+          }
         }
 
-        // check every 5 seconds
-        if (newTime % 5 === 0) {
-          console.log("5 seconds passed");
-          lastShowdownTime.current = newTime;
-          const random = Math.random();
-
-          RPC.call("showdown", random, RPC.Mode.ALL);
-        }
-
-
-        // restore after 2 seconds when showdown
-        if (newTime - lastShowdownTime.current === 2) {
-          console.log("2 seconds passed after showdown");
-
-          RPC.call("restore", "2 seconds passed after showdown", RPC.Mode.ALL);
-        }
-
-        // 
-
-
+        //
       }
       setTimer(newTime, true);
     }, 1000);
     return () => clearTimeout(timeout);
   }, [host, timer, stage, soloGame]);
 
-
   //function that console log every 5 seconds
-
 
   const startGame = () => {
     setStage("countdown");
@@ -146,6 +146,7 @@ export const GameStateProvider = ({ children }) => {
   return (
     <GameStateContext.Provider
       value={{
+        winner,
         stage,
         timer,
         players,
