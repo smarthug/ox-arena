@@ -8,6 +8,7 @@ insertCoin({
   skipLobby: true,
   gameId: "Nrkxf84kYcXG6I3RY6sJ",
   discord: false,
+  maxPlayersPerRoom: 2,
 }).then(() =>
   ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
