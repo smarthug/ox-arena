@@ -39,7 +39,7 @@ export const OXArena = () => {
   RPC.register("showdown", (num) => {
     // Math.random() < 0.5 ? setRedHexagonHit(true) : setBlueHexagonHit(true);
     // setRedHexagonHit(true);
-    console.log(num)
+    // console.log(num)
     if (num > 0.5) {
       setRedHexagonHit(true);
     } else {
@@ -56,36 +56,15 @@ export const OXArena = () => {
     <group>
       <Hexagon
         scale={[3, 1, 3]}
-        // key={columnIndex}
-        // position-x={columnIndex * HEX_X_SPACING}
         position-y={-0.3}
         color={"red"}
-        onHit={() => {
-          // const hexagonKey = `${floorIndex}-${rowIndex}-${columnIndex}`;
-          // setHexagonHit((prev) => ({
-          //   ...prev,
-          //   [hexagonKey]: true,
-          // }));
-          // RPC.call("hexagonHit", { hexagonKey }, RPC.Mode.ALL);
-        }}
-        // hit={hexagonHit[`${floorIndex}-${rowIndex}-${columnIndex}`]}
         hit={redHexagonHit}
       />
       <Hexagon
         scale={[3, 1, 3]}
-        // key={columnIndex}
         position-x={2 * HEX_X_SPACING}
         position-y={-0.3}
         color={"blue"}
-        onHit={() => {
-          // const hexagonKey = `${floorIndex}-${rowIndex}-${columnIndex}`;
-          // setHexagonHit((prev) => ({
-          //   ...prev,
-          //   [hexagonKey]: true,
-          // }));
-          // RPC.call("hexagonHit", { hexagonKey }, RPC.Mode.ALL);
-        }}
-        // hit={hexagonHit[`${floorIndex}-${rowIndex}-${columnIndex}`]}
         hit={blueHexagonHit}
       />
     </group>

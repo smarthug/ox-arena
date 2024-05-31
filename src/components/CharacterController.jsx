@@ -159,7 +159,7 @@ export const CharacterController = ({
       !state.getState("dead")
     ) {
       state.setState("dead", true);
-      // setState("lastDead", state.state.profile, true);
+      setState("lastDead", state.state.profile, true);
       playAudio("Dead", true);
     }
   });

@@ -11,7 +11,7 @@ import { Character } from "./Character";
 export const Podium = () => {
   const { winner } = useGameState();
   // const [winner, setWinner] = useMultiplayerState("winner", null);
-  const winnerProfile = winner 
+  const winnerProfile = winner || getState("lastDead");
   // console.log(winnerProfile)
 
   // const winnerProfile = winner || getState("lastDead");

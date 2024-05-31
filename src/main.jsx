@@ -15,3 +15,5 @@ insertCoin({
     </React.StrictMode>
   )
 );
+
+

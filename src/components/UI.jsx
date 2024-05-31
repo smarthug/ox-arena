@@ -1,10 +1,28 @@
-import { openDiscordInviteDialog } from "playroomkit";
+// import { openDiscordInviteDialog } from "playroomkit";
 import { useAudioManager } from "../hooks/useAudioManager";
 import { useGameState } from "../hooks/useGameState";
 
 export const UI = () => {
   const { audioEnabled, setAudioEnabled } = useAudioManager();
   const { timer, startGame, host, stage, players } = useGameState();
+
+  function sharePage() {
+    if (navigator.share) {
+        navigator.share({
+            title: document.title,
+            text: 'Check out this page!',
+            url: window.location.href
+        })
+        .then(() => {
+            console.log('Page shared successfully');
+        })
+        .catch((error) => {
+            console.error('Error sharing the page:', error);
+        });
+    } else {
+        alert('Your browser does not support the Web Share API');
+    }
+}
 
   return (
     <main
@@ -56,7 +74,7 @@ export const UI = () => {
             bg-gradient-to-br from-orange-500 to-yellow-500 
             hover:opacity-80 transition-all duration-200 
             px-12 py-4 rounded-lg font-black text-xl text-white drop-shadow-lg"
-            onClick={openDiscordInviteDialog}
+            onClick={sharePage}
           >
             INVITE
           </button>

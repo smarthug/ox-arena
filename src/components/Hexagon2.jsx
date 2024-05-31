@@ -4,14 +4,26 @@ Command: npx gltfjsx@6.2.3 public/models/hexagon.glb -o src/components/Hexagon.j
 */
 
 import { useGLTF } from "@react-three/drei";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RigidBody } from "@react-three/rapier";
 
+const TIME_AFTER_HIT = 600;
+
 export function Hexagon({ color, hit,...props }) {
+  const [disabled, setDisabled] = useState(false);
   const { nodes, materials } = useGLTF("/models/hexagon.glb", "draco/gltf/");
 
 
-  if (hit) {
+  useEffect(() => {
+    if (hit) {
+      setTimeout(() => {
+        setDisabled(true);
+        // playAudio(`Pop${randInt(1, 5)}`);
+      }, TIME_AFTER_HIT);
+    }
+  }, [hit]);
+
+  if (disabled) {
     return null;
   }
 
@@ -21,11 +33,6 @@ export function Hexagon({ color, hit,...props }) {
       type={"fixed"}
       name="hexagon"
       colliders="hull"
-      onCollisionEnter={(e) => {
-        if (e.other.rigidBodyObject.name === "player") {
-          onHit();
-        }
-      }}
     >
       <group {...props}>
         <mesh geometry={nodes.Hexagon.geometry} material={materials.hexagon}>
