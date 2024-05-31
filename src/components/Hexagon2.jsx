@@ -14,16 +14,16 @@ export function Hexagon({ color, hit,...props }) {
   const { nodes, materials } = useGLTF("/models/hexagon.glb", "draco/gltf/");
 
 
-  useEffect(() => {
-    if (hit) {
-      setTimeout(() => {
-        setDisabled(true);
-        // playAudio(`Pop${randInt(1, 5)}`);
-      }, TIME_AFTER_HIT);
-    }
-  }, [hit]);
+  // useEffect(() => {
+  //   if (hit) {
+  //     setTimeout(() => {
+  //       setDisabled(hit);
+  //       // playAudio(`Pop${randInt(1, 5)}`);
+  //     }, TIME_AFTER_HIT);
+  //   }
+  // }, [hit]);
 
-  if (disabled) {
+  if (hit) {
     return null;
   }
 
